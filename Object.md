@@ -88,6 +88,31 @@ What happens here is *new* creates an object from function object Bird.
 Its power comes in because it will use Bird's *prototype property* as the *prototype link* for the new object.
 
 ### Problem with using "constructor invocation pattern"
+Using *new* i one of four ways in which to invoke a function, the most popular way being call the function.
+```javascript
+var Vehicle = function(type) {
+    this.type = type;
+    return type;
+}
+
+var car = Vehicle('ToYota'); //Normal function call
+var plane = new Vehicle('Boeing');
+```
+*car* was assigned the result of invoking Vehicle as a normal function, but *plane* on the other was assigned the result of using the *constructor invocation pattern* which is an object (the return is ignored). This is terrible, and it is very easy to make a mistake.
+
+Objects cann now be created with a chosen prototype link by doing the following:
+```javascript
+var animal = {
+    "type": "cat",
+    "make_sound": function() {
+        return 'prrrrrr';
+    }
+}
+
+var cat = Object.create(animal);
+cat.make_sound(); //prrrrrr
+cat.type; //cat
+```
 
 # WrapUp
 | | Object Literal | Function Object | Object from Function |
